@@ -1,0 +1,67 @@
+{
+  "bundle": {
+    "commonSourceDirectory": "../src",
+    "sourceFiles": [
+      "../src/common/ISlot.ts",
+      "../src/common/Queue.ts",
+      "../src/common/QueuingStrategy.ts",
+      "../src/common/Runloop.ts",
+      "../src/common/Sentinels.ts",
+      "../src/common/StateMachine.ts",
+      "../src/common/Stream.ts",
+      "../src/common/StreamConsumer.ts",
+      "../src/common/StreamDestination.ts",
+      "../src/common/StreamProducer.ts",
+      "../src/common/StreamStates.ts",
+      "../src/common/utils.ts",
+      "../src/readable/ReadableStream.ts",
+      "../src/readable/ReadableStream+Teeing.ts",
+      "../src/readable/ReadableStreamConsumer.ts",
+      "../src/readable/ReadableStreamDefaultController.ts",
+      "../src/readable/ReadableStreamDefaultReader.ts",
+      "../src/readable/ReadableStreamProducer.ts",
+      "../src/readable/UnderlyingSource.ts",
+      "../src/writable/UnderlyingSink.ts",
+      "../src/writable/WritableStream.ts",
+      "../src/writable/WritableStreamConsumer.ts",
+      "../src/writable/WritableStreamDefaultController.ts",
+      "../src/writable/WritableStreamDefaultWriter.ts",
+      "../src/writable/WritableStreamProducer.ts"
+    ],
+    "js": {
+      "sections": [
+        {
+          "pos": 0,
+          "end": 13,
+          "kind": "prologue",
+          "data": "use strict"
+        },
+        {
+          "pos": 14,
+          "end": 69085,
+          "kind": "text"
+        }
+      ],
+      "sources": {
+        "prologues": [
+          {
+            "file": 0,
+            "text": "",
+            "directives": [
+              {
+                "pos": -1,
+                "end": -1,
+                "expression": {
+                  "pos": -1,
+                  "end": -1,
+                  "text": "use strict"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "version": "4.2.3"
+}

@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>Stream-Tests</title>
+  </head>
+  <body>
+    <script>
+      const items = [
+        {
+          category: 'readable-streams',
+          cases: [
+            'bad-strategies',
+            'bad-underlying-sources',
+            'cancel',
+            'constructor',
+            'count-queuing-strategy-integration',
+            'default-reader',
+            'floating-point-total-queue-size',
+            'general',
+            'tee'
+          ]
+        },
+        {
+          category: 'writable-streams',
+          cases: [
+            'aborting',
+            'bad-strategies',
+            'bad-underlying-sinks',
+            /*'byte-length-queuing-strategy',*/
+            'close',
+            'constructor',
+            'count-queuing-strategy',
+            'error',
+            'floating-point-total-queue-size',
+            'general',
+            'properties',
+            /*'reentrant-strategy',*/
+            'start',
+            'write'
+          ]
+        }
+      ]
+
+      for (const item of items) {
+        const { category, cases } = item
+        document.write('<ul><h3>' + kabcaseToCapital(category) + ' test</h3>')
+
+        const overallUrl = 'template.html?category=' + category + cases.map(c => '&case=' + c).join('')
+        document.write('<li><a href="' + overallUrl + '">Overall</a></li>')
+
+        for (const testcase of cases) {
+          const url = 'template.html?category=' + category + '&case=' + testcase
+          document.write('<li><a href="' + url + '">' + kabcaseToCapital(testcase) + '</a></li>')
+        }
+        document.write('</ul>')
+      }
+
+      function kabcaseToCapital(str) {
+        return str.split('-').map(capitalize).join(' ')
+      }
+
+      function capitalize(str) {
+        return str.substr(0,1).toUpperCase() + str.substr(1)
+      }
+    </script>
+  </body>
+</html>

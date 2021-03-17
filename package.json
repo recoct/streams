@@ -1,0 +1,23 @@
+{
+  "name": "streams",
+  "version": "1.0.0",
+  "description": "a simple yet bright implementation for streams API which are conformed to WHATWG specifications",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist && npx tsc -b && cp -r tests/reports dist"
+  },
+  "keywords": [
+    "streams",
+    "implementation",
+    "WHATWG"
+  ],
+  "author": "recoct@outlook.com",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.2.3"
+  }
+}

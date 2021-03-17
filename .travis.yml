@@ -1,0 +1,24 @@
+language: node_js
+
+node_js: '12'
+
+branches:
+  only:
+    - master
+
+git:
+  quite: true
+  depth: 1
+  submodules: false
+
+install: npm install
+
+script: npm run build
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GH_TOKEN
+  keep_history: true
+  on:
+    branch: master

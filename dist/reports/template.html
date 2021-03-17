@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <script>
+      const URLSearchUtil = {
+        getValue: (search, key) => {
+          const regexp = new RegExp('(?!$)(?:^\\?|&)' + key + '(?:=([^&]*))?(?=&|$)', 'i')
+          const match = regexp.exec(search)
+          if (!match) {
+            return null
+          }
+          return match[1]
+        },
+
+        getAllValues: (search, key) => {
+          const regexp = new RegExp('(?!$)(?:^\\?|&)' + key + '(?:=([^&]*))?(?=&|$)', 'gi')
+          let match, values = []
+          while (match = regexp.exec(search)) {
+            values.push(match[1])
+          }
+          return values
+        }
+      }
+
+      initTestReportTitle()
+
+      function initTestReportTitle() {
+        const search = document.location.search
+        const category = URLSearchUtil.getValue(search, 'category')
+        const cases = URLSearchUtil.getAllValues(search, 'cases')
+        if (typeof category === 'undefined' || cases.length === 0) {
+          // redirect back to index page
+        }
+        document.write('<title>' + category + ':' + cases.join(',') + '</title>')
+      }
+    </script>
+    <base href="../../">
+  </head>
+  <body>
+    <script src="dist/streams.js?v=4.0"></script>
+    <script src="tests/testharness/testharness.js"></script>
+    <script src="tests/testharness/testharnessreport.js"></script>
+    <script src="tests/reports/importer.js"></script>
+    <script>
+      setup({ explicit_done: true })
+      importTestUtils().then(importTestCases).then(done, done)
+
+      function importTestUtils() {
+        const resources = [
+          'recording-streams',
+          'rs-test-templates',
+          'rs-utils',
+          'test-utils'
+        ]
+        const dir = 'tests/cases/streams/resources/'
+        const paths = resources.map(id => dir + id + '.js')
+        return importScripts(paths, getDefaultDeps())
+      }
+
+      function importTestCases() {
+        const search = document.location.search
+        const category = URLSearchUtil.getValue(search, 'category')
+        const testcases = URLSearchUtil.getAllValues(search, 'case')
+        const env = 'any'
+        const dir = 'tests/cases/streams/' + category + '/'
+        console.log('cases', testcases)
+        const paths = testcases.map(id => dir + id + '.' + env + '.js?v=4.0')
+        return importScripts(paths, getDefaultDeps())
+      }
+
+      function getDefaultDeps() {
+        const deps = [
+          {
+            namespace: 'globalThis',
+            entites: [
+              'self',
+            ]
+          },
+          {
+            namespace: 'WHATWG.Streams',
+            entites: [
+              'UnderlyingSource',
+              'ReadableStream',
+              'ReadableStreamDefaultReader',
+              'UnderlyingSink',
+              'WritableStream',
+              'WritableStreamDefaultWriter',
+              'CountQueuingStrategy',
+              'ByteLengthQueuingStrategy',
+            ]
+          }
+        ]
+        return deps
+      }
+
+    </script>
+  </body>
+</html>
