@@ -680,29 +680,32 @@ var WHATWG;
 var WHATWG;
 (function (WHATWG) {
     function assert(condition, message) {
-        var _a;
         if (!condition) {
             const error = message instanceof Error ? message : new Error(message);
             error.name = 'AssertionError';
-            (_a = Error.captureStackTrace) === null || _a === void 0 ? void 0 : _a.call(Error, error, assert);
+            if (typeof Error.captureStackTrace === 'function') {
+                Error.captureStackTrace(error, assert);
+            }
             throw error;
         }
     }
     WHATWG.assert = assert;
     function guard(condition, message) {
-        var _a;
         if (!condition) {
             const error = message instanceof Error ? message : new TypeError(message);
-            (_a = Error.captureStackTrace) === null || _a === void 0 ? void 0 : _a.call(Error, error, guard);
+            if (typeof Error.captureStackTrace === 'function') {
+                Error.captureStackTrace(error, guard);
+            }
             throw error;
         }
     }
     WHATWG.guard = guard;
     function assertUnreached(message) {
-        var _a;
         const error = message instanceof Error ? message : new Error(message);
         error.name = 'AssertionError';
-        (_a = Error.captureStackTrace) === null || _a === void 0 ? void 0 : _a.call(Error, error, assert);
+        if (typeof Error.captureStackTrace === 'function') {
+            Error.captureStackTrace(error, assertUnreached);
+        }
         throw error;
     }
     WHATWG.assertUnreached = assertUnreached;

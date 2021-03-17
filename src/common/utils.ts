@@ -16,7 +16,9 @@ namespace WHATWG {
     if (!condition) {
       const error = message instanceof Error ? message : new Error(message)
       error.name = 'AssertionError'
-      Error.captureStackTrace?.(error, assert)
+      if (typeof Error.captureStackTrace === 'function') {
+        Error.captureStackTrace(error, assert)
+      }
       throw error
     }
   }
@@ -25,7 +27,9 @@ namespace WHATWG {
   function guard(condition: boolean, message?: any): asserts condition {
     if (!condition) {
       const error = message instanceof Error ? message : new TypeError(message)
-      Error.captureStackTrace?.(error, guard)
+      if (typeof Error.captureStackTrace === 'function') {
+        Error.captureStackTrace(error, guard)
+      }
       throw error
     }
   }
@@ -34,7 +38,9 @@ namespace WHATWG {
   function assertUnreached(message?: any): never {
     const error = message instanceof Error ? message : new Error(message)
     error.name = 'AssertionError'
-    Error.captureStackTrace?.(error, assert)
+    if (typeof Error.captureStackTrace === 'function') {
+      Error.captureStackTrace(error, assertUnreached)
+    }
     throw error
   }
 
