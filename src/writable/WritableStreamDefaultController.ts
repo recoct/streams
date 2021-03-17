@@ -16,9 +16,6 @@ namespace WHATWG.Streams {
     }
 
     public error(reason?: any) {
-      const captured = {} as any
-      ;(Error as any).captureStackTrace(captured, Object.getPrototypeOf(this).error)
-
       const canPropagateError = this.consumer!.error(reason)
       if (canPropagateError) {
         this.producer?.error(reason)

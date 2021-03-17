@@ -1087,8 +1087,6 @@ var WHATWG;
                 }));
             }
             next() {
-                const captured = {};
-                Error.captureStackTrace(captured, Object.getPrototypeOf(this).next);
                 if (!this.started || this.pulls >= MAX_PULLS_INFLIGHT || this.shouldYield()) {
                     return;
                 }
@@ -1556,8 +1554,6 @@ var WHATWG;
             }
             error(reason) {
                 var _a;
-                const captured = {};
-                Error.captureStackTrace(captured, Object.getPrototypeOf(this).error);
                 const canPropagateError = this.consumer.error(reason);
                 if (canPropagateError) {
                     (_a = this.producer) === null || _a === void 0 ? void 0 : _a.error(reason);

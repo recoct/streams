@@ -29,8 +29,6 @@ namespace WHATWG.Streams {
     }
 
     public next() {
-      const captured = {} as any
-      ;(Error as any).captureStackTrace(captured, Object.getPrototypeOf(this).next)
       if (!this.started || this.pulls >= MAX_PULLS_INFLIGHT || this.shouldYield()) {
         return
       }
