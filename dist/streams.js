@@ -1259,7 +1259,7 @@ var WHATWG;
                      * @rejection_handled
                      * @deprecated_paramter controller
                      */
-                    close( /*controller*/) {
+                    close(controller) {
                         try {
                             let r = close && Reflect.apply(close, sink, [ /*controller*/]);
                             if (r && typeof r.then === 'function') {
@@ -1269,7 +1269,7 @@ var WHATWG;
                                 }
                                 // ensure return as Promise<void>
                                 return WHATWG.HANDLED(r.then(WHATWG.NO_OP, (e) => {
-                                    /*controller.error(e)*/
+                                    controller.error(e);
                                     throw e;
                                 }));
                             }
@@ -1277,7 +1277,7 @@ var WHATWG;
                         }
                         catch (e) {
                             return WHATWG.DEFER(() => {
-                                /*controller.error(e)*/
+                                controller.error(e);
                                 throw e;
                             });
                         }
@@ -1439,7 +1439,7 @@ var WHATWG;
                             else {
                                 this.stream.dequeue();
                                 WHATWG.assert(this.stream.empty);
-                                const r = this.sink.close( /*this.controller*/);
+                                const r = this.sink.close(this.controller);
                                 r.then(resolve, reject);
                                 r.catch(e => {
                                     this.abortedUnexpectedly = true;

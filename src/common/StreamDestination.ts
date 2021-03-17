@@ -30,7 +30,7 @@ namespace WHATWG.Streams {
   	write?(chunk: T, controller: C): void | Promise<void>
   	/** @hook @async */
     /** @deprecated_parameter controller */
-    close?(/*controller: C*/): void | Promise<void>
+    close?(controller: C): void | Promise<void>
   }
 
   export

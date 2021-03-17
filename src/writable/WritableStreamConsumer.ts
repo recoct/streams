@@ -69,7 +69,7 @@ namespace WHATWG.Streams {
             } else {
               this.stream.dequeue()
               assert(this.stream.empty)
-              const r = this.sink.close(/*this.controller*/)
+              const r = this.sink.close(this.controller)
               r.then(resolve, reject)
               r.catch(e => {
                 this.abortedUnexpectedly = true

@@ -62,7 +62,7 @@ namespace WHATWG.Streams {
          * @rejection_handled
          * @deprecated_paramter controller
          */
-        close(/*controller*/) {
+        close(controller) {
           try {
             let r = close && Reflect.apply(close, sink, [ /*controller*/ ])
             if (r && typeof r.then === 'function') {
@@ -72,14 +72,14 @@ namespace WHATWG.Streams {
               }
               // ensure return as Promise<void>
               return HANDLED(r.then(NO_OP, (e: any) => {
-                /*controller.error(e)*/
+                controller.error(e)
                 throw e
               }))
             }
             return Promise.resolve()
           } catch (e) {
             return DEFER(() => {
-              /*controller.error(e)*/
+              controller.error(e)
               throw e
             })
           }
