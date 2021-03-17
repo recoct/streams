@@ -1,11 +1,11 @@
 namespace WHATWG.Streams {
-	export
-	interface GenericController {
+  export
+  interface GenericController {
     error(e?: any): void
   }
 
-	export
-	interface SetUpLogic<C extends GenericController = any> {
+  export
+  interface SetUpLogic<C extends GenericController = any> {
     /** @hook @async */
     start?(controller: C): void | Promise<void>
   }
@@ -26,9 +26,9 @@ namespace WHATWG.Streams {
 
   export
   interface Sink<T, C extends GenericController = any> extends SetUpLogic<C>, Pick<TearDownLogic, 'abort'> {
-  	/** @hook @async */
-  	write?(chunk: T, controller: C): void | Promise<void>
-  	/** @hook @async */
+    /** @hook @async */
+    write?(chunk: T, controller: C): void | Promise<void>
+    /** @hook @async */
     /** @deprecated_parameter controller */
     close?(controller: C): void | Promise<void>
   }

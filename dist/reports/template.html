@@ -68,6 +68,7 @@
       }
 
       function getDefaultDeps() {
+        ensureGlobalThis()
         const deps = [
           {
             namespace: 'globalThis',
@@ -90,6 +91,22 @@
           }
         ]
         return deps
+      }
+
+      function ensureGlobalThis() {
+        if (typeof globalThis === 'object') {
+          return
+        }
+        if (typeof window === 'object') {
+          globalThis = window
+          return
+        }
+        if (typeof global === 'object') {
+          globalThis = global
+        }
+        if (typeof self === 'object') {
+          globalThis = self
+        }
       }
 
     </script>
